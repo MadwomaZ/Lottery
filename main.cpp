@@ -1,6 +1,7 @@
 #include <iostream>
 #include <lottery.h>
 
+
 using namespace std;
 
 int main()
