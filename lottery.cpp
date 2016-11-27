@@ -34,6 +34,6 @@ void Lottery::set_name()
 
 void Lottery::load_history()
 {
-//    get_html_file(name_lottery, url_lottery);
-    parser_files(name_lottery);
+    get_html_file(name_lottery, url_lottery);
+    get_all_data(name_lottery);
 }
