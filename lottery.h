@@ -14,10 +14,7 @@ class Lottery
     std::string url_lottery;
     std::vector <Circulation> circulations;
 public:
-    Lottery(unsigned int max_number, unsigned int min_amount, unsigned int max_amount,
-            const std::vector <Circulation> & circulations) :
-        max_number(max_number), min_amount_of_numbers_in_combination(min_amount),
-        max_amount_of_numbers_in_combination(max_amount), circulations(circulations) { set_name(); load_history();}
+    Lottery(unsigned int max_number, unsigned int min_amount, unsigned int max_amount);
     void get_info();
     void set_name();
     void load_history();

@@ -14,7 +14,8 @@ class Circulation
     unsigned int amount_of_odd_numbers = 0;
     int expected_value = 0;
 public:
-    Circulation(unsigned int number, const std::vector <unsigned int>& numbers, unsigned int superprize = 0);
+    Circulation(unsigned int number, const std::vector <unsigned int>& numbers, unsigned int superprize);
+    Circulation(unsigned int number, const std::vector <unsigned int>& numbers);
     unsigned int get_sum_numbers() { return sum_numbers; }
     unsigned int get_number() { return number; }
     std::vector <unsigned int> get_numbers() { return numbers; }

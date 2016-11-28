@@ -4,6 +4,14 @@
 
 using namespace std;
 
+Lottery::Lottery(unsigned int max_number, unsigned int min_amount, unsigned int max_amount) :
+    max_number(max_number), min_amount_of_numbers_in_combination(min_amount),
+    max_amount_of_numbers_in_combination(max_amount)
+{
+    set_name();
+    load_history();
+}
+
 void Lottery::get_info()
 {
     cout << "Lottery " << name_lottery << endl;
@@ -36,4 +44,5 @@ void Lottery::load_history()
 {
     get_html_file(name_lottery, url_lottery);
     get_all_data(name_lottery);
+    circulations = get_circulations(name_lottery, max_amount_of_numbers_in_combination);
 }

@@ -1,8 +1,10 @@
-#include "html.h"
+﻿#include "html.h"
+#include <algorithm>
 #include <string>
 #include <fstream>
 #include <ctype.h>
 #include <vector>
+#include <sstream>
 
 size_t write_data(void *ptr, size_t size, size_t nmemb, void *stream)
 {
@@ -123,7 +125,7 @@ std::vector <unsigned int> parser_file(const std::string &path)
 void get_all_data(const std::string &dir)
 {
     std::ofstream fout((dir +  '/' + "circulations.csv").c_str());
-    fout << "number circulation: winning numbers" << std::endl;
+    fout << "number circulation, winning numbers" << std::endl;
     unsigned int num = 1;
     while (true)
     {
@@ -131,7 +133,7 @@ void get_all_data(const std::string &dir)
         if (std::ifstream(path))
         {
             std::vector <unsigned int> numbers = parser_file(path);
-            fout << num << ": ";
+            fout << num << ", ";
             for (size_t i=0; i < numbers.size(); i++)
             {
                 fout << numbers[i];
@@ -146,4 +148,36 @@ void get_all_data(const std::string &dir)
         num++;
     }
     fout.close();
+}
+
+std::vector<Circulation> get_circulations(const std::string &dir, unsigned int count_numbers)
+{
+    std::vector <Circulation> result;
+    std::ifstream file((dir + "/circulations.csv").c_str());
+    std::string line, cell;
+    while (std::getline(file, line))
+    {
+        line.erase(std::remove(line.begin(), line.end(), ' '), line.end());
+        std::vector <unsigned int> data;
+        data.reserve(count_numbers);
+        std::stringstream lineStream(line);
+        while (std::getline(lineStream, cell, ','))
+        {
+            if (isdigit(cell[0]))
+            {
+                data.push_back(std::stoi(cell));
+            }
+        }
+        if (data.size() == 0)
+            continue;
+        unsigned int number = data[0];
+        std::vector <unsigned int> numbers;
+        for (std::size_t i = 1; i < count_numbers + 1; i++)
+            numbers.push_back(data[i]);
+
+        Circulation circ(number, numbers);
+        result.push_back(circ);
+    }
+    file.close();
+    return result;
 }

@@ -7,6 +7,13 @@ Circulation::Circulation(unsigned int number, const std::vector<unsigned int> &n
     calc_amount_odd_and_even_numbers();
 }
 
+Circulation::Circulation(unsigned int number, const std::vector<unsigned int> &numbers) :
+    number(number), numbers(numbers)
+{
+    calc_sum_numbers();
+    calc_amount_odd_and_even_numbers();
+}
+
 void Circulation::calc_sum_numbers()
 {
     for (int i = 0; i < numbers.size(); i++)
