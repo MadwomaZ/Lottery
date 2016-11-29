@@ -10,6 +10,12 @@ class Lottery
     unsigned int max_number = 0; //49
     unsigned int min_amount_of_numbers_in_combination = 0; //3
     unsigned int max_amount_of_numbers_in_combination = 0; //6
+    unsigned int max_sum = 0;
+    unsigned int min_sum = 0;
+    unsigned int max_amount_of_odd_numbers = 0;
+    unsigned int min_amount_of_odd_numbers = 0;
+    unsigned int max_amount_of_even_numbers = 0;
+    unsigned int min_amount_of_even_numbers = 0;
     std::string name_lottery;
     std::string url_lottery;
     std::vector <Circulation> circulations;
@@ -18,6 +24,8 @@ public:
     void get_info();
     void set_name();
     void load_history();
+    void set_max_and_min_sum_numbers();
+    void set_max_and_min_amount_of_even_numbers();
 };
 
 #endif // LOTTERY_H

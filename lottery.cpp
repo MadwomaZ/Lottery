@@ -16,6 +16,11 @@ void Lottery::get_info()
 {
     cout << "Lottery " << name_lottery << endl;
     cout << "URL: " << url_lottery << endl;
+    cout << "Maximum sum: " << max_sum << endl;
+    cout << "Minimum sum: " << min_sum << endl;
+    cout << "Maximum amount of even numbers: " << max_amount_of_even_numbers << endl;
+    cout << "Minimum amount of even numbers: " << min_amount_of_even_numbers << endl;
+    cout << "Minimum sum: " << min_sum << endl;
     cout << endl;
     cout << "Circulations:" << endl;
     for (size_t i = 0; i < circulations.size(); i++)
@@ -45,4 +50,48 @@ void Lottery::load_history()
     get_html_file(name_lottery, url_lottery);
     get_all_data(name_lottery);
     circulations = get_circulations(name_lottery, max_amount_of_numbers_in_combination);
+    set_max_and_min_sum_numbers();
+    set_max_and_min_amount_of_even_numbers();
+}
+
+void Lottery::set_max_and_min_sum_numbers ()
+{
+    unsigned int max = circulations[0].get_sum_numbers();
+    unsigned int min = max;
+    unsigned int sum = 0;
+    for (size_t i= 0; i < circulations.size(); i++)
+    {
+        sum = circulations[i].get_sum_numbers();
+        if (sum > max)
+        {
+            max = sum;
+        }
+        if (sum < min)
+        {
+            min = sum;
+        }
+    }
+    max_sum = max;
+    min_sum = min;
+}
+
+void Lottery::set_max_and_min_amount_of_even_numbers ()
+{
+    unsigned int max = circulations[0].get_amount_of_even_numbers();
+    unsigned int min = max;
+    unsigned int amount = 0;
+    for (size_t i= 0; i < circulations.size(); i++)
+    {
+        amount = circulations[i].get_amount_of_even_numbers();
+        if (amount > max)
+        {
+            max = amount;
+        }
+        if (amount < min)
+        {
+            min = amount;
+        }
+    }
+    max_amount_of_even_numbers = max;
+    min_amount_of_even_numbers = min;
 }
