@@ -3,6 +3,7 @@
 
 #include "circulation.h"
 #include "html.h"
+#include <algorithm>    // std::sort
 #define STOLOTO_URL "http://www.stoloto.ru/"
 
 class Lottery
@@ -26,6 +27,8 @@ public:
     void load_history();
     void set_max_and_min_sum_numbers();
     void set_max_and_min_amount_of_even_numbers();
+    void set_max_and_min_amount_of_odd_numbers();
+    std::vector <unsigned int> get_often_falling_numbers();
 };
 
 #endif // LOTTERY_H
