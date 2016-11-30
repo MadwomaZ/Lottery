@@ -122,35 +122,31 @@ void Lottery::set_max_and_min_amount_of_odd_numbers ()
 
 vector <unsigned int> Lottery::get_often_falling_numbers()
 {
-    vector<unsigned int> sums; //index=number value=sum
-    sums.resize(max_number);
+    map<unsigned int, unsigned int> sums; //key=number value=sum
     vector <unsigned int> result;
     for (size_t i = 0; i < circulations.size(); i++)
     {
         vector <unsigned int> circ_numbers = circulations[i].get_numbers();
         for (size_t i = 0; i < circ_numbers.size(); i++)
         {
-            sums[circ_numbers[i]-1] += 1;
+            try {
+                sums.at(circ_numbers[i]) += 1;
+            } catch(...)
+            {
+//                cout << "catch" << endl;
+                sums[circ_numbers[i]] = 1;
+            }
         }
     }
-    unsigned int idx_max = 0, max_value = 0;
-    for (size_t i = 0; i < max_number; i++)
-    {
-        cout << i + 1 << " " << sums[i] << endl;
-        if (sums[i] > max_value)
-        {
-            result.push_back(sums[i]);
-            max_value = sums[i];
-//            idx_max = i;
-        }
-
-
+    vector<int> v;
+    for(map<unsigned int, unsigned int>::iterator it = sums.begin(); it != sums.end(); ++it) {
+      v.push_back(it->first);
+      cout << it->first << " " << it->second << endl;
     }
-    cout << "max: ";
-    for (size_t i = 0; i < result.size(); i++)
-    {
-        cout << result[i] << " "; //need 6 values
-    }
-    cout << endl;
+//    for (size_t i = 0; i < sums.size(); i++)
+//    {
+
+//    }
+    //Пройти по всем значениям мапы и записать 6 максимальных
     return result;
 }
