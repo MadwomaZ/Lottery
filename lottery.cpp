@@ -133,20 +133,38 @@ vector <unsigned int> Lottery::get_often_falling_numbers()
                 sums.at(circ_numbers[i]) += 1;
             } catch(...)
             {
-//                cout << "catch" << endl;
                 sums[circ_numbers[i]] = 1;
             }
         }
     }
-    vector<int> v;
-    for(map<unsigned int, unsigned int>::iterator it = sums.begin(); it != sums.end(); ++it) {
-      v.push_back(it->first);
-      cout << it->first << " " << it->second << endl;
+    multimap<unsigned int, unsigned int> reverse_sums; //key=sum value=number
+    for(map<unsigned int, unsigned int>::iterator it = sums.begin(); it != sums.end(); ++it)
+    {
+        reverse_sums.insert(pair<unsigned int, unsigned int> (it->second, it->first));
+//        cout << it->first << " "<< it->second << endl;
     }
-//    for (size_t i = 0; i < sums.size(); i++)
-//    {
+    cout << endl;
+    size_t i = 0;
+    for(multimap<unsigned int, unsigned int>::reverse_iterator it = reverse_sums.rbegin(); it != reverse_sums.rend(); ++it)
+    {
+        if (i < 10) //Need 10 numbers as used on site
+        {
+            cout << it->first << " "<< it->second << endl;
+            result.push_back(it->second) ;
+            i++;
+        }
+        else
+        {
+            continue;
+        }
+    }
 
-//    }
-    //Пройти по всем значениям мапы и записать 6 максимальных
+    cout << "Maximums: " << endl;
+    for (size_t i = 0; i < result.size(); i++)
+    {
+        cout << result[i] << " ";
+    }
+    cout << endl;
     return result;
+
 }

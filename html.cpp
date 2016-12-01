@@ -108,6 +108,8 @@ std::vector <unsigned int> parser_file(const std::string &path)
     std::string line;
     std::vector <unsigned int> numbers;
     while (std::getline(fin, line))
+    {
+        line.erase(std::remove(line.begin(), line.end(), ' '), line.end());
         if (line.find("class=\"number\"") != std::string::npos)
         {
             std::string tmp;
@@ -116,8 +118,12 @@ std::vector <unsigned int> parser_file(const std::string &path)
                 if (isdigit(line[i]))
                     tmp += line[i];
             }
-            numbers.push_back(std::stoi(tmp));
+            if (tmp.size() > 0)
+            {
+                numbers.push_back(std::stoi(tmp));
+            }
         }
+    }
     fin.close();
     return numbers;
 }
@@ -163,6 +169,7 @@ std::vector<Circulation> get_circulations(const std::string &dir, unsigned int c
         std::stringstream lineStream(line);
         while (std::getline(lineStream, cell, ','))
         {
+//            std::cout << cell << std::endl;
             if (isdigit(cell[0]))
             {
                 data.push_back(std::stoi(cell));
