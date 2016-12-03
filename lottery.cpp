@@ -123,7 +123,7 @@ void Lottery::set_max_and_min_amount_of_odd_numbers ()
 vector <unsigned int> Lottery::get_often_falling_numbers()
 {
     map<unsigned int, unsigned int> sums; //key=number value=sum
-    vector <unsigned int> result;
+    vector <unsigned int> result_max, result_min;
     for (size_t i = 0; i < circulations.size(); i++)
     {
         vector <unsigned int> circ_numbers = circulations[i].get_numbers();
@@ -133,38 +133,56 @@ vector <unsigned int> Lottery::get_often_falling_numbers()
                 sums.at(circ_numbers[i]) += 1;
             } catch(...)
             {
+                cout << circ_numbers[i] << endl;
                 sums[circ_numbers[i]] = 1;
             }
         }
     }
     multimap<unsigned int, unsigned int> reverse_sums; //key=sum value=number
+    size_t idx = 0;
     for(map<unsigned int, unsigned int>::iterator it = sums.begin(); it != sums.end(); ++it)
     {
         reverse_sums.insert(pair<unsigned int, unsigned int> (it->second, it->first));
-//        cout << it->first << " "<< it->second << endl;
+        cout << idx  << " " << it->first << " "<< it->second << endl;
+        idx++;
     }
     cout << endl;
     size_t i = 0;
     for(multimap<unsigned int, unsigned int>::reverse_iterator it = reverse_sums.rbegin(); it != reverse_sums.rend(); ++it)
     {
+//        cout << "i=" << i << endl;
+//        cout << "reverse_sums.size() - 10=" << reverse_sums.size() - 10 << endl;
         if (i < 10) //Need 10 numbers as used on site
         {
-            cout << it->first << " "<< it->second << endl;
-            result.push_back(it->second) ;
-            i++;
+//            cout << it->first << " "<< it->second << endl;
+            result_max.push_back(it->second);
         }
-        else
+        else if (i > reverse_sums.size() - 11)
         {
-            continue;
+//            cout  << "min: " << it->first << " "<< it->second << endl;
+            result_min.push_back(it->second);
         }
+//        else
+//        {
+//            continue;
+//        }
+
+        i++;
     }
 
     cout << "Maximums: " << endl;
-    for (size_t i = 0; i < result.size(); i++)
+    for (size_t i = 0; i < result_max.size(); i++)
     {
-        cout << result[i] << " ";
+        cout << result_max[i] << " ";
     }
     cout << endl;
-    return result;
+
+    cout << "Minimums: " << endl;
+    for (size_t i = 0; i < result_min.size(); i++)
+    {
+        cout << result_min[i] << " ";
+    }
+    cout << endl;
+    return result_max;
 
 }
