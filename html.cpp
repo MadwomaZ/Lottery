@@ -80,6 +80,25 @@ void get_html_file(const std::string &dir, const std::string &url)
         {
             //Succeed
             std::cout << "Get page: " << url + num_str << std::endl;
+            const char * filename = (dir +  '/' + num_str).c_str();
+            std::ifstream fin(filename);
+            std::string line;
+            bool need_repeat = true;
+            while (std::getline(fin, line))
+            {
+                line.erase(std::remove(line.begin(), line.end(), ' '), line.end());
+                if (line.find("class=\"number\"") != std::string::npos)
+                {
+                    need_repeat = false;
+//                    std::cout << line << std::endl;
+                    continue;
+                }
+            }
+            if (need_repeat) //need testing
+            {
+                std::cout << "Repeat load page: " << url + num_str << std::endl;
+                num_circulation--;
+            }
         }
         else
         {
