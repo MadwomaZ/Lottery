@@ -20,6 +20,8 @@ class Lottery
     std::string name_lottery;
     std::string url_lottery;
     std::vector <Circulation> circulations;
+    std::vector <unsigned int> often_falling_numbers;
+    std::vector <unsigned int> rarely_falling_numbers;
 public:
     Lottery(unsigned int max_number, unsigned int min_amount, unsigned int max_amount);
     void get_info();
@@ -28,7 +30,7 @@ public:
     void set_max_and_min_sum_numbers();
     void set_max_and_min_amount_of_even_numbers();
     void set_max_and_min_amount_of_odd_numbers();
-    std::vector <unsigned int> get_often_falling_numbers();
+    void set_often_and_rarely_falling_numbers();
 };
 
 #endif // LOTTERY_H

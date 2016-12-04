@@ -90,7 +90,6 @@ void get_html_file(const std::string &dir, const std::string &url)
                 if (line.find("class=\"number\"") != std::string::npos)
                 {
                     need_repeat = false;
-//                    std::cout << line << std::endl;
                     continue;
                 }
             }
@@ -149,6 +148,11 @@ std::vector <unsigned int> parser_file(const std::string &path)
 
 void get_all_data(const std::string &dir)
 {
+    if (std::ifstream((dir +  '/' + "circulations.csv").c_str()))
+    {
+        std::cout << "All data have already been received" << std::endl;
+        return;
+    }
     std::ofstream fout((dir +  '/' + "circulations.csv").c_str());
     fout << "number circulation, winning numbers" << std::endl;
     unsigned int num = 1;
