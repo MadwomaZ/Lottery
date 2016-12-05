@@ -9,9 +9,11 @@ CONFIG -= qt
 SOURCES += main.cpp \
     circulation.cpp \
     lottery.cpp \
-    html.cpp
+    html.cpp \
+    number.cpp
 
 HEADERS += \
     circulation.h \
     lottery.h \
-    html.h
+    html.h \
+    number.h
