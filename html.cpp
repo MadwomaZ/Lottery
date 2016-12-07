@@ -201,9 +201,9 @@ std::vector<Circulation> get_circulations(const std::string &dir, unsigned int c
         if (data.size() == 0)
             continue;
         unsigned int number = data[0];
-        std::vector <unsigned int> numbers;
+        std::vector <Number> numbers;
         for (std::size_t i = 1; i < count_numbers + 1; i++)
-            numbers.push_back(data[i]);
+            numbers.push_back(Number(data[i]));
 
         Circulation circ(number, numbers);
         result.push_back(circ);

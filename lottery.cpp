@@ -135,14 +135,14 @@ void Lottery::set_often_and_rarely_falling_numbers()
     map<unsigned int, unsigned int> sums; //key=number value=sum
     for (size_t i = 0; i < circulations.size(); i++)
     {
-        vector <unsigned int> circ_numbers = circulations[i].get_numbers();
+        vector <Number> circ_numbers = circulations[i].get_numbers();
         for (size_t i = 0; i < circ_numbers.size(); i++)
         {
             try {
-                sums.at(circ_numbers[i]) += 1;
+                sums.at(circ_numbers[i].get_number()) += 1;
             } catch(...)
             {
-                sums[circ_numbers[i]] = 1;
+                sums[circ_numbers[i].get_number()] = 1;
             }
         }
     }

@@ -1,7 +1,8 @@
 #ifndef NUMBER_H
 #define NUMBER_H
 #include "circulation.h"
-
+#include <vector>
+class Circulation;
 class Number
 {
     unsigned int number;
@@ -10,7 +11,7 @@ class Number
     unsigned int frequency;
 public:
     Number(unsigned int number);
-    ~Number();
+    ~Number() {}
     void get_info();
     unsigned int get_number() { return number; }
     bool get_even_number() { return an_even; }
